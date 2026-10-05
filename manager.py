@@ -72,12 +72,27 @@ def delete_contacts(Target_name):
     else:
         print(f"Contact '{Target_name}' not found.")
 
+def update_contacts(Target_name):
+
+       phone=input("Enter phone number:")
+       email=input("Enter email id:")
+       list_of_contacts=load_contacts()      
+       list_of_contacts=[c for c in list_of_contacts if c['Name'].lower()!=Target_name.lower()]
+       contact={"Name":Target_name,
+               "Phone number":phone,
+               "Email id":email
+               }
+
+       list_of_contacts.append(contact)
+       save_contacts(list_of_contacts)
+       print(f"Contact '{Target_name}' updated.")
 
 while True:
     print("Enter 1 to view contacts.")
     print("Enter 2 to save contact.")
     print("Enter 3 to delete contact.")
-    print("Enter 4 to  exit.")
+    print("Enter 4 to update contact")
+    print("Enter 5 to  exit.")
 
     option=int(input("Enter option to proceed = "))
 
@@ -86,15 +101,14 @@ while True:
         continue
     elif option==2:
         add_contacts()
-
-        continue
-
-        detail=input("Enter details of person.")
-        save_contacts(detail)
         continue
     elif option==3:
         name=input("Enter name of person = ")
         delete_contacts(name)
         continue
     elif option==4:
+        name=input("Enter name of person =")
+        update_contacts(name)
+        continue
+    elif option==5:
         break
